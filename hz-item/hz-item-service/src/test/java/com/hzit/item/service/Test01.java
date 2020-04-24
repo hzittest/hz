@@ -1,7 +1,6 @@
 package com.hzit.item.service;
 
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -98,7 +97,6 @@ public class Test01 {
 
     }
 
-
     @Test
     public void test02() {
         //
@@ -111,7 +109,9 @@ public class Test01 {
         iPage.setCurrent(2);
         iPage.setSize(10);
 
-
+        //SELECT * FROM category LIMIT 2-1*10,10
+        // ?: (page-1)*pageSize
+        // ？：pageSize
         //查询的结果
         IPage<Category> selectPage = categoryMapper.selectPage(iPage, null);
 
@@ -119,7 +119,11 @@ public class Test01 {
         long pages = selectPage.getPages();
         long size = selectPage.getSize();
         long total = selectPage.getTotal();
+
+
         List<Category> records = selectPage.getRecords();
+
+
         for (Category record : records) {
             System.out.println(record);
         }
@@ -127,9 +131,17 @@ public class Test01 {
 
 //// 根据 Wrapper 条件，查询全部记录（并翻页）
 //        IPage<Map<String, Object>> selectMapsPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-
-
     }
 
+    @Test
+    public void test03(Category category){
+
+        category.setId(1l);
+
+        //Category category = new Category();
+        int insert = categoryMapper.insert(category);
+        System.out.println(insert);
+
+    }
 
 }
