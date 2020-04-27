@@ -4,10 +4,7 @@ package com.hzit.item.service.controller;
 import com.hzit.item.Category;
 import com.hzit.item.service.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,13 @@ public class CategoryController {
         List<Category> categoryList = categoryService.findCategroyListByPid(pid);
         return categoryList;
     }
+
+
+    @GetMapping("/bid/{bid}")
+    public List<Category> findListByBid(@PathVariable("bid") Long bid){
+        List<Category> categoryList = categoryService.findCategroyListByBid(bid);
+        return categoryList;
+    }
+
 
 }

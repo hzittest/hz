@@ -24,4 +24,12 @@ public interface IBrandService {
      * @return
      */
     int saveBrand(Brand brand, List<Integer> cids);
+
+    /**
+     * 修改品牌信息
+     * @param brand
+     * @param cids
+     * @return
+     */
+    int updateBrand(Brand brand, List<Integer> cids);
 }

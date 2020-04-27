@@ -26,7 +26,7 @@ public class BrandServiceImpl implements IBrandService {
 
         QueryWrapper<Brand> queryWrapper = new QueryWrapper<>();
         //1.根据key查询--模糊查询name
-        queryWrapper.like("name",key);
+        queryWrapper.like("name", key);
 
         //2.分页查询
         IPage<Brand> ipage = new Page<>();
@@ -34,7 +34,7 @@ public class BrandServiceImpl implements IBrandService {
         ipage.setSize(rows);
 
         //3.排序
-        queryWrapper.orderByDesc(desc,sortBy);
+        queryWrapper.orderByDesc(desc, sortBy);
 
         IPage<Brand> selectPage = brandMapper.selectPage(ipage, queryWrapper);
 
@@ -49,23 +49,42 @@ public class BrandServiceImpl implements IBrandService {
     @Override
     public int saveBrand(Brand brand, List<Integer> cids) {
 
-        log.info("------->添加之前的Brand:"+brand);
+        log.info("------->添加之前的Brand:" + brand);
         //1.brand的ID是自增的
         int insert = brandMapper.insert(brand);
 
-        log.info("------->添加之后的Brand:"+brand);
+        log.info("------->添加之后的Brand:" + brand);
 
         //2.brand_category需要的brandId。添加成功之后的回显的id
-        if(insert>0)
-        {
+        if (insert > 0) {
             for (Integer cid : cids) {
                 long cidlong = cid;
-                brandMapper.saveBrandCategory(brand.getId(),cidlong);
+                brandMapper.saveBrandCategory(brand.getId(), cidlong);
             }
         }
 
 
-
         return insert;
     }
+
+    @Override
+    public int updateBrand(Brand brand, List<Integer> cids) {
+
+        //1.维护 关系表 tb_category_brand
+        //1.1 先根据bid 删除表中所有的关联记录
+        int row = brandMapper.deleteCategoryBrandByBid(brand.getId());
+
+        //1.2 添加新修改之后的id
+        for (Integer cid : cids) {
+            long cidlong = cid;
+            brandMapper.saveBrandCategory(brand.getId(), cidlong);
+        }
+
+        //2.修改brand表中的信息
+        int rows = brandMapper.updateById(brand);
+
+        return rows;
+    }
+
+
 }

@@ -1,5 +1,10 @@
 server:
   port: 8081
+#  ssl:
+#    key-store: tomcat.keystore
+#    key-password: 123456
+#    key-store-type: JKS
+#    key-alias: tomcat
 spring:
   application:
     name: item-service

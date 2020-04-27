@@ -34,6 +34,14 @@ public class BrandController {
         return row;
     }
 
+    @PutMapping(value = {"","/"})
+    public int updateBrand(Brand brand, @RequestParam("cids")List<Integer> cids){
+
+        int row =  brandService.updateBrand(brand,cids);
+
+        return row;
+    }
+
 
 
 

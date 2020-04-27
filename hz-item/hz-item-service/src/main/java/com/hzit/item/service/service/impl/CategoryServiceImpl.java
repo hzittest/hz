@@ -23,4 +23,10 @@ public class CategoryServiceImpl implements ICategoryService {
         List<Category> categoryList = categoryMapper.selectList(queryWrapper);
         return categoryList;
     }
+
+    @Override
+    public List<Category> findCategroyListByBid(Long bid) {
+        List<Category> categoryList = categoryMapper.selectListByBid(bid);
+        return categoryList;
+    }
 }
