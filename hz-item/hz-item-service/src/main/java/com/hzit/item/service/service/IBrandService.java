@@ -32,4 +32,11 @@ public interface IBrandService {
      * @return
      */
     int updateBrand(Brand brand, List<Integer> cids);
+
+    /**
+     * 根据 cid获取品牌列表
+     * @param cid
+     * @return
+     */
+    List<Brand> findBrandListByCid(Long cid);
 }

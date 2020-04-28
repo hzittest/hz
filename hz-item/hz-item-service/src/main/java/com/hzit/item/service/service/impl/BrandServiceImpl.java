@@ -86,5 +86,15 @@ public class BrandServiceImpl implements IBrandService {
         return rows;
     }
 
+    @Override
+    public List<Brand> findBrandListByCid(Long cid) {
+
+//        QueryWrapper<Brand> queryWrapper = new QueryWrapper();
+//        queryWrapper.eq("cid", cid);
+//        List<Brand> brandList = brandMapper.selectList(queryWrapper);
+        List<Brand> brandList = brandMapper.findBrandListByCid(cid);
+        return brandList;
+    }
+
 
 }

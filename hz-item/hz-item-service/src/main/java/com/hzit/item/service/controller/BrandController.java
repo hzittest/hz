@@ -4,6 +4,7 @@ import com.hzit.common.PageResult;
 import com.hzit.item.Brand;
 import com.hzit.item.service.service.IBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,20 @@ public class BrandController {
         int row =  brandService.updateBrand(brand,cids);
 
         return row;
+    }
+
+    //Request URL: http://api.hz.com/api/item/brand/cid/9
+    //Request Method: GET
+
+    /**
+     * 根据CID获取 品牌列表
+     *
+     * @return
+     */
+    @GetMapping("/cid/{cid}")
+    public ResponseEntity<List<Brand>> findBrandListByCid(@PathVariable("cid") Long cid){
+         List<Brand> brandList = brandService.findBrandListByCid(cid);
+        return ResponseEntity.ok(brandList);
     }
 
 

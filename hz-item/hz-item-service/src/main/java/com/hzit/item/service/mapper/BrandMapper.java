@@ -5,6 +5,9 @@ import com.hzit.item.Brand;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface BrandMapper extends BaseMapper<Brand> {
 
@@ -18,4 +21,9 @@ public interface BrandMapper extends BaseMapper<Brand> {
      */
     @Delete("DELETE FROM tb_category_brand WHERE brand_id=#{bid}")
     int deleteCategoryBrandByBid(@Param("bid") Long bid);
+
+
+    @Select("SELECT tb.* FROM tb_brand tb INNER JOIN tb_category_brand cb ON tb.`id` = cb.`brand_id` WHERE cb.`category_id` = #{cid}")
+    List<Brand> findBrandListByCid(@Param("cid") Long cid);
+
 }
