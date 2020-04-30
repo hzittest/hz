@@ -2,11 +2,13 @@ package com.hzit.item;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @TableName("tb_spu")
 @Data
@@ -29,4 +31,16 @@ public class Spu {
    // @TableField("last_update_time")
     private Date lastUpdateTime;// 最后修改时间
     // 省略getter和setter
+
+
+    //商品详情  数据中，不需要自动去处理该字段。选择忽略
+    @TableField(exist = false)
+    private SpuDetail spuDetail;
+
+    // spu对应多个sku信息
+    @TableField(exist = false)
+    private List<Sku> skus;
+
+
+
 }

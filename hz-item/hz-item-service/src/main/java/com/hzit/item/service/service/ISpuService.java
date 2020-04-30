@@ -1,6 +1,7 @@
 package com.hzit.item.service.service;
 
 import com.hzit.common.PageResult;
+import com.hzit.item.Spu;
 import com.hzit.item.bo.SpuBo;
 
 import java.util.List;
@@ -17,4 +18,13 @@ public interface ISpuService {
      */
     public PageResult<SpuBo> page(String key, Boolean saleable, int page, int rows);
 
+    /**
+     * 添加商品
+     *      - 商品详情
+     *      - 商品规格
+     *      - 商品的库存
+     * @param spu
+     * @return
+     */
+    int saveGoods(Spu spu);
 }

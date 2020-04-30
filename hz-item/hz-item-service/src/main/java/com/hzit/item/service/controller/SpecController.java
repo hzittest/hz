@@ -38,6 +38,4 @@ public class SpecController {
         List<SpecParam> specParamList = specParamService.findListByGidOrCid(gid, cid);
         return ResponseEntity.ok(specParamList);
     }
-
-
 }
